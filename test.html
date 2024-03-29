@@ -1,0 +1,105 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main-outro">
+      <div class="internal">
+        <div class="time">
+          <span id="hour">00:</span>
+          <span id="minute">00:</span>
+          <span id="second">00</span>
+        </div>
+        <div id="button">
+          <button name="button" type="button" class="button1" onclick="startStopwatch()">Start</button>
+          <button name="button" type="button" class="button2" onclick="stopStopwatch()">Stop</button>
+          <button name="button" type="button" class="button3" onclick="resetStopwatch()">Reset</button>
+        </div>
+      </div>
+    </div>
+    <!--<script src="script.js"></script>
+  </body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stopwatch</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main-outro">
+      <div class="internal">
+        <div class="time">
+          <span id="hours">00:</span>
+          <span id="minutes">00:</span>
+          <span id="seconds">00:</span>
+          <span id="milliseconds">00</span>
+        </div>
+        <div id="button">
+          <button name="button" type="button" class="button1" onclick="startStopwatch()">Start</button>
+          <button name="button" type="button" class="button2" onclick="stopStopwatch()">Stop</button>
+          <button name="button" type="button" class="button3" onclick="resetStopwatch()">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let timer;
+      let hours = 0;
+      let minutes = 0;
+      let seconds = 0;
+      let milliseconds=0;
+
+      function startStopwatch() {
+        clearInterval(timer);
+        timer = setInterval(updateStopwatch, 10);
+      }
+
+      function stopStopwatch() {
+        clearInterval(timer);
+      }
+
+      function resetStopwatch() {
+        clearInterval(timer);
+        hours = 0;
+        minutes = 0;
+        seconds = 0;
+        milliseconds=0;
+        updateStopwatch();
+      }
+
+      function updateStopwatch() {
+        milliseconds++;
+        if (milliseconds === 100) {
+          milliseconds = 0;
+          seconds++;
+          if (seconds === 60) {
+            seconds = 0;
+            minutes++;
+          }
+          if(minutes===60){
+            minutes=0;
+            hours++;
+          }
+        }
+
+        // Update the HTML
+        document.getElementById("hours").innerText = pad(hours) + ":";
+        document.getElementById("minutes").innerText = pad(minutes) + ":";
+        document.getElementById("seconds").innerText = pad(seconds)+ ":";
+        document.getElementById("milliseconds").innerText = pad(milliseconds);
+      }
+
+      function pad(value) {
+        return value < 10 ? "0" + value : value;
+      }
+    </script>
+  </body>
+</html>
